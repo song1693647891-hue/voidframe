@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VOIDFRAME — Creative Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
 <style>
+  @import url('https://fonts.font.im/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=Space+Mono:ital@0;1&display=swap');
+
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
@@ -25,14 +25,13 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Outfit', 'PingFang SC', 'Microsoft YaHei', sans-serif;
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
     cursor: none;
   }
 
-  /* Custom Cursor */
   .cursor {
     position: fixed;
     width: 10px; height: 10px;
@@ -41,7 +40,7 @@
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+    transition: width 0.3s, height 0.3s;
   }
   .cursor-ring {
     position: fixed;
@@ -51,22 +50,14 @@
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
-    transition: transform 0.15s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
-  }
-  body:hover .cursor { opacity: 1; }
-
-  /* Noise overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.6;
+    transition: width 0.3s, height 0.3s, border-color 0.3s;
   }
 
-  /* Nav */
+  @media (pointer: coarse) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -84,7 +75,7 @@
     border-color: var(--border);
   }
   .logo {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
     font-size: 1.6rem;
     letter-spacing: 0.1em;
     color: var(--text);
@@ -115,7 +106,6 @@
   .nav-links a:hover { color: var(--text); }
   .nav-links a:hover::after { transform: scaleX(1); }
 
-  /* Hero */
   #hero {
     min-height: 100vh;
     display: flex;
@@ -134,11 +124,12 @@
   .hero-grid {
     position: absolute;
     inset: 0;
-    background-image: 
+    background-image:
       linear-gradient(var(--border) 1px, transparent 1px),
       linear-gradient(90deg, var(--border) 1px, transparent 1px);
     background-size: 80px 80px;
     mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
   }
   .hero-tag {
     font-family: 'Space Mono', monospace;
@@ -150,19 +141,17 @@
     animation: fadeUp 0.8s 0.3s forwards;
   }
   .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
     font-size: clamp(5rem, 14vw, 13rem);
     line-height: 0.9;
     letter-spacing: -0.01em;
-    position: relative;
     opacity: 0;
     animation: fadeUp 0.9s 0.5s forwards;
   }
   .hero-title .dim { color: rgba(240,237,232,0.18); }
-  .hero-title .line2 { 
+  .hero-title .line2 {
     display: block;
     color: var(--accent);
-    -webkit-text-stroke: 0px;
     text-shadow: 0 0 80px rgba(200,255,0,0.3);
   }
   .hero-sub {
@@ -198,7 +187,6 @@
     transform: translate(-2px, -2px);
     box-shadow: 4px 4px 0 rgba(200,255,0,0.3);
   }
-  .hero-cta svg { width: 16px; height: 16px; }
   .hero-scroll {
     position: absolute;
     bottom: 2.5rem; right: 4rem;
@@ -220,7 +208,6 @@
     animation: scrollPulse 2s infinite;
   }
 
-  /* Section shared */
   section { padding: 7rem 4rem; position: relative; }
   .section-label {
     font-family: 'Space Mono', monospace;
@@ -233,21 +220,15 @@
     align-items: center;
     gap: 1rem;
   }
-  .section-label::before {
-    content: '';
-    width: 30px;
-    height: 1px;
-    background: var(--accent);
-  }
+  .section-label::before { content: ''; width: 30px; height: 1px; background: var(--accent); }
   .section-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     line-height: 1;
     letter-spacing: 0.02em;
     margin-bottom: 3rem;
   }
 
-  /* Works */
   #works { background: var(--bg2); }
   .works-grid {
     display: grid;
@@ -259,7 +240,6 @@
     overflow: hidden;
     background: var(--bg3);
     border: 1px solid var(--border);
-    cursor: none;
     transition: border-color 0.3s;
   }
   .work-card:hover { border-color: rgba(200,255,0,0.3); }
@@ -270,10 +250,6 @@
   .work-thumb {
     width: 100%;
     aspect-ratio: 16/9;
-    background: var(--bg3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
     position: relative;
   }
@@ -316,24 +292,10 @@
     justify-content: space-between;
     align-items: flex-end;
   }
-  .work-title {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 0.25rem;
-  }
-  .work-tag {
-    font-size: 0.7rem;
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    letter-spacing: 0.1em;
-  }
-  .work-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: rgba(255,255,255,0.08);
-  }
+  .work-title { font-size: 1rem; font-weight: 500; margin-bottom: 0.25rem; }
+  .work-tag { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
+  .work-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: rgba(255,255,255,0.08); }
 
-  /* About */
   #about {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -356,7 +318,7 @@
   .about-grid-deco {
     position: absolute;
     inset: 0;
-    background-image: 
+    background-image:
       linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
     background-size: 40px 40px;
@@ -382,13 +344,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
-  .about-content {}
-  .about-text {
-    font-size: 1.05rem;
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-  }
+  .about-text { font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
   .about-text strong { color: var(--text); font-weight: 500; }
   .stats-row {
     display: flex;
@@ -398,25 +354,9 @@
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
-  .stat-item {}
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    color: var(--accent);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.25rem;
-  }
-  .skills-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--accent); line-height: 1; }
+  .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; }
+  .skills-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .skill-tag {
     padding: 0.4rem 0.9rem;
     border: 1px solid var(--border);
@@ -427,7 +367,6 @@
   }
   .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* Services */
   #services { background: var(--bg2); }
   .services-grid {
     display: grid;
@@ -455,32 +394,11 @@
   }
   .service-item:hover { background: var(--bg3); }
   .service-item:hover::before { transform: scaleX(1); }
-  .service-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 4rem;
-    color: rgba(255,255,255,0.04);
-    line-height: 1;
-    margin-bottom: 1.5rem;
-  }
-  .service-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-  .service-desc {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-  .service-price {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-  }
+  .service-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: rgba(255,255,255,0.04); line-height: 1; margin-bottom: 1.5rem; }
+  .service-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .service-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .service-price { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; }
 
-  /* Contact */
   #contact {
     text-align: center;
     padding: 8rem 4rem;
@@ -493,7 +411,7 @@
     background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(127,90,240,0.08) 0%, transparent 70%);
   }
   .contact-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
     font-size: clamp(3rem, 8vw, 8rem);
     line-height: 0.95;
     margin: 1.5rem 0 2.5rem;
@@ -512,16 +430,10 @@
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.25rem;
     transition: color 0.3s, border-color 0.3s;
-    position: relative;
     margin-bottom: 3rem;
   }
   .contact-email:hover { color: var(--accent); border-color: var(--accent); }
-  .contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    position: relative;
-  }
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; position: relative; }
   .contact-link {
     padding: 0.75rem 1.75rem;
     border: 1px solid var(--border);
@@ -537,7 +449,6 @@
   .contact-link.primary { background: var(--accent); color: #000; border-color: var(--accent); }
   .contact-link.primary:hover { background: transparent; color: var(--accent); }
 
-  /* Footer */
   footer {
     border-top: 1px solid var(--border);
     padding: 2rem 4rem;
@@ -545,19 +456,9 @@
     justify-content: space-between;
     align-items: center;
   }
-  .footer-copy {
-    font-size: 0.75rem;
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-  }
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.2);
-  }
+  .footer-copy { font-size: 0.75rem; color: var(--muted); font-family: 'Space Mono', monospace; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); }
 
-  /* Animations */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
@@ -567,32 +468,29 @@
     50% { opacity: 1; }
   }
 
-  /* Reveal on scroll */
   .reveal {
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
 
-  /* Responsive */
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
     #hero { padding: 0 1.5rem 4rem; }
-    section { padding: 5rem 1.5rem; }
-    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-sub { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .hero-scroll { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 2rem; }
     .works-grid { grid-template-columns: 1fr; }
     .work-card:nth-child(n) { grid-column: span 1; }
     .services-grid { grid-template-columns: 1fr; }
     footer { padding: 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+    .contact-links { flex-direction: column; align-items: center; }
   }
 </style>
 </head>
@@ -623,7 +521,7 @@
     <p class="hero-desc">动画 · 视觉创意 · 品牌设计<br>将创意转化为令人难忘的视觉体验。</p>
     <a href="#works" class="hero-cta">
       查看作品
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
   <div class="hero-scroll">
@@ -717,27 +615,12 @@
   <div class="about-content">
     <div class="section-label reveal">About</div>
     <h2 class="section-title reveal">创作者<br>简介</h2>
-    <p class="about-text reveal">
-      我是一位专注于<strong>动画与综合创意</strong>的设计师，来自艺术与技术的交汇点。
-      擅长将抽象概念转化为引人入胜的视觉叙事，从静态插画到动态影像，每一帧都是精心设计的表达。
-    </p>
-    <p class="about-text reveal">
-      借助 <strong>AI 工具赋能</strong>创作流程，我能以更高效率实现过去难以企及的创意想象——
-      用技术拓宽艺术的边界。
-    </p>
+    <p class="about-text reveal">我是一位专注于<strong>动画与综合创意</strong>的设计师，来自艺术与技术的交汇点。擅长将抽象概念转化为引人入胜的视觉叙事，从静态插画到动态影像，每一帧都是精心设计的表达。</p>
+    <p class="about-text reveal">借助 <strong>AI 工具赋能</strong>创作流程，我能以更高效率实现过去难以企及的创意想象——用技术拓宽艺术的边界。</p>
     <div class="stats-row reveal">
-      <div class="stat-item">
-        <div class="stat-num">3+</div>
-        <div class="stat-label">年创作经验</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">20+</div>
-        <div class="stat-label">完成项目</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">创意可能</div>
-      </div>
+      <div class="stat-item"><div class="stat-num">3+</div><div class="stat-label">年创作经验</div></div>
+      <div class="stat-item"><div class="stat-num">20+</div><div class="stat-label">完成项目</div></div>
+      <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">创意可能</div></div>
     </div>
     <div class="skills-list reveal">
       <span class="skill-tag">动画制作</span>
@@ -780,10 +663,7 @@
 <section id="contact">
   <div class="contact-bg"></div>
   <div class="section-label reveal" style="justify-content:center">Contact</div>
-  <h2 class="contact-title reveal">
-    开始一个<br>
-    <span class="outline">新项目</span>
-  </h2>
+  <h2 class="contact-title reveal">开始一个<br><span class="outline">新项目</span></h2>
   <a href="mailto:hello@voidframe.studio" class="contact-email reveal">hello@voidframe.studio</a>
   <div class="contact-links reveal">
     <a href="mailto:hello@voidframe.studio" class="contact-link primary">发送邮件</a>
@@ -801,13 +681,11 @@
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
-
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
     cursor.style.left = mx + 'px';
     cursor.style.top = my + 'px';
   });
-
   function animRing() {
     rx += (mx - rx) * 0.12;
     ry += (my - ry) * 0.12;
@@ -816,38 +694,24 @@
     requestAnimationFrame(animRing);
   }
   animRing();
-
   document.querySelectorAll('a, button, .work-card, .service-item').forEach(el => {
     el.addEventListener('mouseenter', () => {
-      cursor.style.width = '6px';
-      cursor.style.height = '6px';
-      ring.style.width = '56px';
-      ring.style.height = '56px';
+      cursor.style.width = '6px'; cursor.style.height = '6px';
+      ring.style.width = '56px'; ring.style.height = '56px';
       ring.style.borderColor = 'rgba(200,255,0,0.6)';
     });
     el.addEventListener('mouseleave', () => {
-      cursor.style.width = '10px';
-      cursor.style.height = '10px';
-      ring.style.width = '36px';
-      ring.style.height = '36px';
+      cursor.style.width = '10px'; cursor.style.height = '10px';
+      ring.style.width = '36px'; ring.style.height = '36px';
       ring.style.borderColor = 'rgba(200,255,0,0.4)';
     });
   });
-
   const nav = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  });
-
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 </script>
 </body>
